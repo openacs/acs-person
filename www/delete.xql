@@ -1,22 +1,22 @@
 <?xml version="1.0"?>
 <queryset>
 
-<fullquery name="contact_exists">      
+<fullquery name="person_exists">      
       <querytext>
       
-	    select 1 from contacts where contact_id = :contact_id
+	    select 1 from acs_persons where acs_person_id = :acs_person_id
 	
       </querytext>
 </fullquery>
 
  
-<fullquery name="contact_select">      
+<fullquery name="person_select">      
       <querytext>
       
-    select contact_id,
+    select person_id,
         given_name || ' ' || family_name as name
-    from contacts
-    where contact_id = :contact_id
+    from acs_persons
+    where acs_person_id = :acs_person_id
 
       </querytext>
 </fullquery>
