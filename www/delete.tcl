@@ -7,7 +7,7 @@ ad_page_contract {
     @cvs-id $Id$
 
 } {
-   person_id:integer,notnull
+   acs_person_id:integer,notnull
 }  -validate {
     person_exists -requires {acs_person_id} {
 	if ![db_0or1row person_exists {

@@ -13,7 +13,7 @@
 <fullquery name="person_select">      
       <querytext>
       
-    select person_id,
+    select acs_person_id,
         given_name || ' ' || family_name as name
     from acs_persons
     where acs_person_id = :acs_person_id
