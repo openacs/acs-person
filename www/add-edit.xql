@@ -9,7 +9,8 @@
         given_name,
         middle_name,
         formatted_name,
-        preferred_given_name
+        preferred_given_name,
+	user_id as acs_user_id
     from acs_persons p
     where p.acs_person_id = :acs_person_id
   
