@@ -5,7 +5,7 @@ ad_page_contract {
   @creation-date 2002-09-21
   @cvs-id $Id$
 } {
-    acs_person_id:integer,notnull,optional
+    acs_person_id:integer,optional
     {family_name ""}
     {given_name ""}
     {middle_name ""}
@@ -17,7 +17,10 @@ ad_page_contract {
   page_title:onevalue
 }
 
+# 
 set package_id [ad_conn package_id]
+set user_id [ad_conn user_id]
+set peeraddr [ad_conn peeraddr]
 
 ## vars for quasi localization
 ## since this isn't available yet this is a reminder to myself
@@ -37,79 +40,50 @@ if {[info exists acs_person_id]} {
   set context_bar [ad_context_bar [list "." $cbar_title] $page_title ]
 }
 
-template::form create new_person
+ad_form -name new_person -form {
 
-if {[template::form is_request new_person] && [info exists acs_person_id]} {
+acs_person_id:key
 
-  template::element create new_person acs_person_id \
-      -widget hidden \
-      -datatype number \
-      -value $acs_person_id
+{given_name:text(text) 
+    {label "First Name"}
+    {html {size 40}}
+    {value {$given_name}}}
 
-  db_1row person_select { }
+{middle_name:text(text) 
+    {label "Middle"}
+    {html { size 30 }}}
 
-}
+{family_name:text(text)
+    {label "Last Name"}
+    {html { size 40 }}}
 
-template::element create new_person given_name \
-    -datatype text \
-    -label "First Name" \
-    -html { size 40 } \
-    -value $given_name
+{formatted_name:text(text)
+    {label "Formatted Name"}
+    {html { size 40 }}
+    optional}
+     
+{preferred_given_name:text(text)
+    {label "Preferred Name"}
+    {html { size 40 }}
+    optional}
 
-template::element create new_person middle_name \
-    -datatype text \
-    -label "Middle" \
-    -html { size 30 } \
-    -value $middle_name
+{acs_user_id:text(text)
+    {label "ACS User"}
+    {html {size 10}}
+    optional}
+} -select_query_name person_select -validate {
 
-template::element create new_person family_name \
-    -datatype text \
-    -label "Last Name" \
-    -html { size 40 } \
-    -value $family_name
+} -new_data {
 
-template::element create new_person formatted_name \
-    -datatype text \
-    -label "Formatted Name" \
-    -html { size 40 } \
-    -value $formatted_name
-
-template::element create new_person preferred_given_name \
-    -datatype text \
-    -label "Preferred Name" \
-    -html { size 40 } \
-    -value $preferred_given_name
-
-template::element create new_person spacer3 \
-    -datatype text \
-    -widget inform \
-    -label "" \
-    -value "<br>"
-
-template::element create new_person acs_user_id \
-    -datatype text \
-    -label "ACS User" \
-    -html { size 20 } \
-    -value $acs_user_id
-
-#######################################
-### start of processing of update/new
-#######################################
-## this will only  update the person part
-
-if [template::form is_valid new_person] {
-  set user_id [ad_conn user_id]
-  set peeraddr [ad_conn peeraddr]
-
-  if [info exists acs_person_id] {
-    db_exec_plsql set_person {
-    }
-} else {
-    db_exec_plsql new_person {
-    }
-}
-
+  db_exec_plsql new_person { }
   ad_returnredirect "."
+  ad_script_abort
+
+} -edit_data {
+
+  db_exec_plsql set_person { }
+  ad_returnredirect "."
+  ad_script_abort
 }
 
 ad_return_template
