@@ -1,5 +1,6 @@
 <master>
 <property name="title">@page_title@ @person.pretty_name@</property>
+<property name="context_bar">@context_bar@</property>
 
 <h3>@page_title@</h3>
 <table width="100%">

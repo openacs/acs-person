@@ -1,5 +1,6 @@
 <master>
 <property name="title">@title@</property>
+<property name="context_bar">@context_bar@</property>
 
 <h4>@title@</h4>
 
