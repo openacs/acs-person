@@ -53,6 +53,9 @@
             <file type="content_page" path="www/one.adp"/>
             <file type="content_page" path="www/one.tcl"/>
             <file type="query_file" path="www/one.xql"/>
+            <file type="documentation" path="www/doc/index.html"/>
+            <file type="documentation" path="www/doc/developer.html"/>
+            <file type="documentation" path="www/doc/acs-persons-schema.jpg"/>
         </files>
         <parameters>
         <!-- No version parameters -->
