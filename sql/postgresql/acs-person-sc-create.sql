@@ -6,7 +6,7 @@ select acs_sc_impl__new(
 
 select acs_sc_impl_alias__new(
            'FtsContentProvider',		-- impl_contract_name
-           'contact',           			-- impl_name
+           'acs_person',       			-- impl_name
 	   'datasource',			-- impl_operation_name
 	   'acs_persons__datasource',     		-- impl_alias
 	   'TCL'				-- impl_pl
@@ -14,7 +14,7 @@ select acs_sc_impl_alias__new(
 
 select acs_sc_impl_alias__new(
            'FtsContentProvider',		-- impl_contract_name
-           'contact',          			-- impl_name
+           'acs_person',       			-- impl_name
 	   'url',				-- impl_operation_name
 	   'acs_persons__url',			-- impl_alias
 	   'TCL'				-- impl_pl
@@ -24,21 +24,21 @@ select acs_sc_impl_alias__new(
 create function acs_persons__itrg ()
 returns opaque as '
 begin
-    perform search_observer__enqueue(new.contact_id,''INSERT'');
+    perform search_observer__enqueue(new.acs_person_id,''INSERT'');
     return new;
 end;' language 'plpgsql';
 
 create function acs_persons__dtrg ()
 returns opaque as '
 begin
-    perform search_observer__enqueue(old.contact_id,''DELETE'');
+    perform search_observer__enqueue(old.acs_person_id,''DELETE'');
     return old;
 end;' language 'plpgsql';
 
 create function acs_persons__utrg ()
 returns opaque as '
 begin
-    perform search_observer__enqueue(old.contact_id,''UPDATE'');
+    perform search_observer__enqueue(old.acs_person_id,''UPDATE'');
     return old;
 end;' language 'plpgsql';
 
@@ -51,8 +51,3 @@ for each row execute procedure acs_persons__dtrg ();
 
 create trigger acs_persons__utrg after update on acs_persons
 for each row execute procedure acs_persons__utrg (); 
-
-
-
-
-
