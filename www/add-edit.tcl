@@ -31,7 +31,7 @@ set page_title_e "Edit Person"
 set page_title_c "Create Person"
 
 if {[info exists acs_person_id]} {
-  ad_require_permission $acs_person_id write
+
   set page_title $page_title_e
   set context_bar [ad_context_bar [list "." $cbar_title ] [list "one?acs_person_id=$acs_person_id" $cbar_title] $page_title]
 } else {
@@ -80,6 +80,7 @@ acs_person_id:key
   ad_script_abort
 
 } -edit_data {
+  ad_require_permission $acs_person_id write
 
   db_exec_plsql set_person { }
   ad_returnredirect "."
