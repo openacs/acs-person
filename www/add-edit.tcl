@@ -11,9 +11,6 @@ ad_page_contract {
     {middle_name ""}
     {formatted_name ""}
     {preferred_given_name ""}
-    {affix ""}
-    {suffix ""}
-    {title ""}
     {acs_user_id ""}
 } -properties {
   context_bar:onevalue
@@ -53,12 +50,6 @@ if {[template::form is_request new_person] && [info exists acs_person_id]} {
 
 }
 
-template::element create new_person affix \
-    -datatype text \
-    -label "Affix" \
-    -html { size 20 } \
-    -value $affix
-
 template::element create new_person given_name \
     -datatype text \
     -label "First Name" \
@@ -88,12 +79,6 @@ template::element create new_person preferred_given_name \
     -label "Preferred Name" \
     -html { size 40 } \
     -value $preferred_given_name
-
-template::element create new_person suffix \
-    -datatype text \
-    -label "Suffix" \
-    -html { size 20 } \
-    -value $suffix
 
 template::element create new_person spacer3 \
     -datatype text \
