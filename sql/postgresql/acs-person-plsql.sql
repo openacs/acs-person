@@ -43,7 +43,7 @@ declare
   p_user_id              alias for $7; -- this is not the creation user
   p_creation_user        alias for $8;
   p_creation_ip          alias for $9;
-  p_context_id           alias for $10
+  p_context_id           alias for $10;
   v_acs_person_id acs_persons.acs_person_id%TYPE; 
 begin 
   v_acs_person_id := acs_object__new (  
