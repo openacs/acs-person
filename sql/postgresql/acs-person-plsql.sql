@@ -30,19 +30,20 @@ select inline_0 ();
 
 drop function inline_0 ();
 
-create or replace function acs_person__new (varchar, varchar, varchar, varchar, varchar, 
+create or replace function acs_person__new (integer,varchar, varchar, varchar, varchar, varchar, 
 integer,integer,varchar,integer)
 returns integer as ' 
 declare 
-  p_given_name           alias for $1;
-  p_middle_name          alias for $2; 
-  p_family_name          alias for $3; 
-  p_formatted_name       alias for $4;
-  p_preferred_given_name alias for $5;
-  p_user_id              alias for $6; -- this is not the creation user
-  p_creation_user        alias for $7;
-  p_creation_ip          alias for $8;
-  p_context_id           alias for $9;
+  p_acs_person_id        alias for $1;
+  p_given_name           alias for $2;
+  p_middle_name          alias for $3; 
+  p_family_name          alias for $4; 
+  p_formatted_name       alias for $5;
+  p_preferred_given_name alias for $6;
+  p_user_id              alias for $7; -- this is not the creation user
+  p_creation_user        alias for $8;
+  p_creation_ip          alias for $9;
+  p_context_id           alias for $10
   v_acs_person_id acs_persons.acs_person_id%TYPE; 
 begin 
   v_acs_person_id := acs_object__new (  

@@ -99,6 +99,13 @@ as
             middle_name, 
             formatted_name, 
             preferred_given_name);
+	    
+	acs_permission.grant_permission(
+           object_id => v_acs_person_id,
+           grantee_id => creation_user,
+           privilege => 'admin'
+         );
+
 	return v_acs_person_id;
     end new;
     --
