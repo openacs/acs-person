@@ -3,14 +3,11 @@
 <queryset>
    <rdbms><type>oracle</type><version>8.1.6</version></rdbms>
 
-<fullquery name="contact_delete">      
+<fullquery name="person_delete">      
       <querytext>
       
   begin
-    delete from acs_permissions
-    where object_id = :contact_id;
-
-    contact.delete(:contact_id);
+    acs_person.delete(:acs_person_id);
   end;
 
       </querytext>
