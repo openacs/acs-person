@@ -6,6 +6,7 @@
 <fullquery name="new_person">      
       <querytext>
         select acs_person__new (
+	:acs_person_id,
 	:given_name,
         :middle_name,	
         :family_name,
