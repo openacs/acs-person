@@ -1,41 +1,36 @@
 ad_page_contract {
 
-    Delete Confirmation page for Contacts
+    Delete Confirmation page for acs-person
 
     @author jon@jongriffin.com
-    @creation-date 2002-01-16
+    @creation-date 2002-09-23
     @cvs-id $Id$
 
 } {
-   contact_id:integer,notnull
+   person_id:integer,notnull
 }  -validate {
-    contact_exists -requires {contact_id} {
-	if ![db_0or1row contact_exists {
-	    select 1 from contacts where contact_id = :contact_id
+    person_exists -requires {acs_person_id} {
+	if ![db_0or1row person_exists {
 	}] {
-	    ad_complain "Contact $contact_id does not exist"
+	    ad_complain "Person $acs_person_id does not exist"
 	    return 0
 	}
 	return 1
     }
 } -properties {
     title:onevalue
-    one_contact:onerow
+    one_person:onerow
 }
 
-set title "Delete Contact"
+set title "Delete Person"
 set context_bar [ad_context_bar]
 set package_id [ad_conn package_id]
 set user_id [ad_conn user_id]
 
 # make sure they don't perform URL surgery
-ad_require_permission $contact_id delete
+ad_require_permission $acs_person_id delete
 
-db_1row contact_select {
-    select contact_id,
-        given_name || ' ' || family_name as name
-    from contacts
-    where contact_id = :contact_id
-} -column_array one_contact
+db_1row person_select {
+} -column_array one_person
 
  
