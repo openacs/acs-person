@@ -3,10 +3,10 @@
 <queryset>
    <rdbms><type>postgresql</type><version>7.1</version></rdbms>
 
-<fullquery name="contact_delete">      
+<fullquery name="person_delete">      
       <querytext>
 
-    select contact__del(:contact_id);
+    select acs_person__del(:acs_person_id);
       </querytext>
 </fullquery>
 
