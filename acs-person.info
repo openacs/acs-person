@@ -9,7 +9,6 @@
 
     <version name="0.1d" url="http://openacs.org/repository/download/apm/acs-person-0.1d.apm">
     <database-support>
-        <database>oracle</database>
         <database>postgresql</database>
     </database-support>
         <owner url="mailto:jon@jongriffin.com">Jon Griffin</owner>
